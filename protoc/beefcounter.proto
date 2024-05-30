@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package beefcounter;
+
+option go_package = "myProject1/protoc";
+
+
+import "google/api/annotations.proto";
+
+service BeefCounter {
+    rpc CountBeef (BeefRequest) returns (BeefResponse) {
+        option (google.api.http) = {
+            post: "/v1/beef/summary"
+            body: "*"
+        };
+    }
+}
+
+message BeefRequest {
+    string data = 1;
+}
+
+message BeefResponse {
+    map<string,int32> beef = 1;
+}
